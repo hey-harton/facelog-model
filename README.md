@@ -1,6 +1,10 @@
 # facelog-model
 
-Repositori khusus untuk riset, *training*, evaluasi, dan *packaging* model pengenalan wajah (*face recognition*) pada proyek **Facelog**.
+Repositori kolaborasi **Sains Data**, **Informatika Medis**, dan **Informatika** untuk riset, *training*, evaluasi, dan *packaging* model pengenalan wajah (*face recognition*) pada proyek **Facelog**.
+
+![Podman](https://img.shields.io/badge/Podman-892CA0?style=for-the-badge&logo=podman&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 
 ## Struktur Folder
 
