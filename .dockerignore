@@ -1,0 +1,41 @@
+# Git & agent metadata
+.git
+.gitignore
+.agents
+AGENTS.md
+
+# Python environments & caches
+.venv
+venv
+env
+__pycache__
+*.py[cod]
+*$py.class
+*.egg-info
+.pytest_cache
+
+# Local development, training & tests (not needed for serving image)
+.ipynb_checkpoints
+notebook
+dataset
+scripts
+tests
+requirements-dev.txt
+
+# Secrets
+.env
+
+# Temporary & repomix outputs
+tmp
+repomix-output.*
+
+# Model checkpoints & exported weights (mounted read-only at runtime)
+models/checkpoints
+models/exported/*
+!models/exported/.gitkeep
+
+# Docs & Docker files
+README.md
+docker-compose.yml
+Dockerfile
+.dockerignore

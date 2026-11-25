@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# Temporary & repomix outputs
+tmp/
+repomix-output.*
+
+# Agent instructions & metadata
+.agents/
+AGENTS.md
+
+# Dataset raw & processed (keep directory placeholders and splits tracked)
+dataset/raw/*
+!dataset/raw/.gitkeep
+dataset/processed/*
+!dataset/processed/.gitkeep
+
+# Model weights & exported binaries (keep directory placeholders tracked)
+models/checkpoints/*
+!models/checkpoints/.gitkeep
+models/exported/*
+!models/exported/.gitkeep

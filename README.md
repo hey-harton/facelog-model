@@ -1,0 +1,72 @@
+# facelog-model
+
+Repositori khusus untuk riset, *training*, evaluasi, dan *packaging* model pengenalan wajah (*face recognition*) pada proyek **Facelog**.
+
+## Struktur Folder
+
+```text
+facelog-model/
+├── .agents/                 # Blueprint, rules, dan dokumentasi agen
+├── configs/                 # Konfigurasi data & model (YAML)
+├── dataset/                 # Data mentah, hasil preprocessing, dan daftar split
+│   ├── raw/                 # Data asli hasil penarikan (di-ignore Git)
+│   ├── processed/           # Hasil deteksi, crop, dan alignment (di-ignore Git)
+│   └── splits/              # Daftar split train/val/test (di-track Git)
+├── models/                  # Bobot model
+│   ├── checkpoints/         # Checkpoint selama training (di-ignore Git)
+│   └── exported/            # Model final siap integrasi (.onnx/.tflite, di-ignore Git)
+├── notebook/                # Notebook eksplorasi & eksperimen
+├── scripts/                 # Script CLI (contoh: pull_data.py)
+├── serving/                 # (Opsional) API inferensi untuk tim aplikasi
+├── src/                     # Kode Python inti yang modular
+│   ├── data/                # Penarikan data & preprocessing
+│   ├── models/              # Wrapper detektor & face embedder
+│   ├── training/            # Pipeline training / fine-tuning
+│   ├── evaluation/          # Metrik evaluasi & benchmark
+│   └── inference/           # Pipeline inferensi end-to-end
+├── tests/                   # Unit test & sanity check
+├── .env.example             # Template kredensial environment
+├── .gitignore
+└── requirements.txt
+```
+
+## Setup Environment
+
+1. Buat dan aktifkan virtual environment:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
+2. Pasang dependensi pengembangan lokal:
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+3. Salin template environment jika butuh kredensial sumber data:
+   ```bash
+   copy .env.example .env
+   ```
+
+## Alur Kerja Data
+
+1. Jalankan penarikan data (*dry-run* untuk verifikasi konfigurasi):
+   ```bash
+   python scripts/pull_data.py --dry-run
+   ```
+2. Tarik data ke `dataset/raw/` (sesuaikan implementasi sumber data di `src/data/fetch.py` dan konfigurasi di `configs/data.yaml`):
+   ```bash
+   python scripts/pull_data.py
+   ```
+3. Proses data mentah dari `dataset/raw/` ke `dataset/processed/` menggunakan `src/data/preprocess.py`.
+
+## Menjalankan dengan Docker (Serving API)
+
+Docker disiapkan khusus untuk menjalankan hasil akhir model (*inference/serving API* di port `8000`):
+
+1. Build dan jalankan container:
+   ```bash
+   docker compose up --build -d
+   ```
+2. Cek status service dan kesiapan model:
+   ```bash
+   curl http://localhost:8000/health
+   ```

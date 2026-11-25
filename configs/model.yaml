@@ -1,0 +1,13 @@
+detector:
+  name: retinaface
+  min_confidence: 0.9
+
+embedder:
+  name: arcface
+  embedding_dim: 512
+  exported_path: models/exported/face_embedder.onnx
+
+inference:
+  similarity_metric: cosine
+  threshold: 0.5
+  device: cpu

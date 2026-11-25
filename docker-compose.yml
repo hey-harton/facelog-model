@@ -1,0 +1,24 @@
+services:
+  facelog-model:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: facelog-model:latest
+    container_name: facelog-model
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./configs:/app/configs:ro
+      - ./models/exported:/app/models/exported:ro
+    # Uncomment for NVIDIA GPU passthrough:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
