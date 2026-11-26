@@ -3,8 +3,9 @@
 # Local development, training, and evaluation
 tqdm>=4.66
 pytest>=8.0
-jupyter>=1.0
+ipykernel>=6.29
 matplotlib>=3.8
+kagglehub>=0.3
 
 # Optional: Evaluation & ML utilities
 # scikit-learn>=1.4

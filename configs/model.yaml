@@ -7,7 +7,13 @@ embedder:
   embedding_dim: 512
   exported_path: models/exported/face_embedder.onnx
 
+liveness:
+  name: minifasnet
+  enabled: true
+  threshold: 0.5
+  exported_path: models/exported/minifasnet.onnx
+
 inference:
   similarity_metric: cosine
-  threshold: 0.5
+  threshold: 0.65
   device: cpu

@@ -1,4 +1,4 @@
-"""CLI entrypoint to pull raw dataset files into dataset/raw/."""
+"""CLI entrypoint to pull Kaggle face datasets into dataset/raw/<name>/."""
 
 from __future__ import annotations
 
@@ -22,9 +22,15 @@ def _load_env_if_available() -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    """Parse command-line arguments for pulling data."""
+    """Parse command-line arguments for pulling datasets."""
     parser = argparse.ArgumentParser(
-        description="Pull raw face dataset into dataset/raw/."
+        description="Pull Kaggle face datasets into dataset/raw/<dataset_name>/."
+    )
+    parser.add_argument(
+        "--dataset",
+        choices=["all", "vggface2", "pins", "lfw"],
+        default="all",
+        help="Dataset to pull (default: all).",
     )
     parser.add_argument(
         "--config",
@@ -35,7 +41,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Validate configuration and target directory without fetching remote data.",
+        help="Validate configuration and target directories without downloading.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-copy and overwrite existing files in target directory.",
     )
     return parser.parse_args()
 
@@ -45,7 +56,12 @@ def main() -> int:
     _load_env_if_available()
     args = parse_args()
     config = load_fetch_config(args.config)
-    fetch_dataset(config, dry_run=args.dry_run)
+    fetch_dataset(
+        config,
+        dataset_name=args.dataset,
+        dry_run=args.dry_run,
+        force=args.force,
+    )
     return 0
 
 

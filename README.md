@@ -36,29 +36,31 @@ facelog-model/
 
 ## Setup Environment
 
-1. Buat dan aktifkan virtual environment:
-   ```bash
-   python -m venv .venv
-   .venv\Scripts\activate
+1. Buat dan aktifkan virtual environment dengan **Python 3.11** (Windows PowerShell):
+   ```powershell
+   py -3.11 -m venv .venv
+   .\.venv\Scripts\Activate.ps1
    ```
 2. Pasang dependensi pengembangan lokal:
-   ```bash
+   ```powershell
    pip install -r requirements-dev.txt
    ```
-3. Salin template environment jika butuh kredensial sumber data:
-   ```bash
+3. Salin template environment jika butuh kredensial Kaggle atau sumber data lain:
+   ```powershell
    copy .env.example .env
    ```
 
 ## Alur Kerja Data
 
-1. Jalankan penarikan data (*dry-run* untuk verifikasi konfigurasi):
-   ```bash
-   python scripts/pull_data.py --dry-run
+1. Verifikasi konfigurasi penarikan dataset (*dry-run*):
+   ```powershell
+   python scripts/pull_data.py --dataset lfw --dry-run
    ```
-2. Tarik data ke `dataset/raw/` (sesuaikan implementasi sumber data di `src/data/fetch.py` dan konfigurasi di `configs/data.yaml`):
-   ```bash
-   python scripts/pull_data.py
+2. Tarik dataset Kaggle ke `dataset/raw/<nama_dataset>/` (`lfw`, `pins`, `vggface2`, atau `all`):
+   ```powershell
+   python scripts/pull_data.py --dataset lfw
+   python scripts/pull_data.py --dataset pins
+   python scripts/pull_data.py --dataset vggface2
    ```
 3. Proses data mentah dari `dataset/raw/` ke `dataset/processed/` menggunakan `src/data/preprocess.py`.
 

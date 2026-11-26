@@ -4,9 +4,22 @@ paths:
   splits_dir: dataset/splits
 
 source:
-  type: local
-  endpoint: ""
-  timeout_seconds: 30
+  type: kaggle
+  timeout_seconds: 60
+
+datasets:
+  vggface2:
+    handle: hearfool/vggface2
+    role: training_finetuning
+    subdir: vggface2
+  pins:
+    handle: hereisburak/pins-face-recognition
+    role: operational_1n_simulation
+    subdir: pins
+  lfw:
+    handle: jessicali9530/lfw-dataset
+    role: threshold_calibration_1v1
+    subdir: lfw
 
 preprocessing:
   image_size:
